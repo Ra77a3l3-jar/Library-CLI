@@ -171,6 +171,48 @@ void display_all_books(Library *lib) {
     }
 }
 
+void display_statistics(Library *lib) {
+    if(lib->book_count == 0) {
+        printf("\nNo books in the library to show statistics.\n");
+        return;
+    }
+
+    printf("\n==========================");
+    printf("\n    Book's statistics");
+    printf("\n==========================\n");
+
+    printf("The total number of books is: %d\n", lib->book_count);
+
+    int tot_authors = 0;
+    for(int i = 0; i < lib->book_count; i++) {
+        tot_authors += lib->books[i].author_count;
+    }
+    printf("The total number of authors is: %d\n", tot_authors);
+
+    int tot_pages_all = 0;
+    for(int i = 0; i < lib->book_count; i++) {
+        tot_pages_all += lib->books[i].pages;
+    }
+    int avr_pages = tot_pages_all / lib->book_count;
+    printf("The average number of pages in these books is: %d\n", avr_pages);
+
+    // Find newest and oldest books
+    int newest = 0;
+    int oldest = 0;
+
+    for(int i = 1; i < lib->book_count; i++) {
+        if(lib->books[i].year > lib->books[newest].year) {
+            newest = i;
+        }
+        if(lib->books[i].year < lib->books[oldest].year) {
+            oldest = i;
+        }
+    }
+
+    printf("The newest book is '%s' from %d\n", lib->books[newest].title, lib->books[newest].year);
+    printf("The oldest book is '%s' from %d\n", lib->books[oldest].title, lib->books[oldest].year);
+}
+
 /* =============== MAIN FUNCTION ============== */
 
 int main(void) {
