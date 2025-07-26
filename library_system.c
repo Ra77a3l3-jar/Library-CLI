@@ -63,6 +63,63 @@ Student* find_student_by_name(StudentSystem *sys, const char *name);
 Book* find_book_by_title(Library *lib, const char *title);
 
 int main(void) {
-
-    return 0;
+    Library *library = NULL;
+    int choice;
+    int init_capacity = 2;
+    
+    printf("=== Dynamic Library Management System ===\n");
+    
+    library = create_library(init_capacity);
+    if (library == NULL) {
+        printf("Failed to create library. Exiting.\n");
+        return 1;
+    }
+    
+    while (1) {
+        printf("\n--- Library Menu ---\n");
+        printf("1. Add Book\n");
+        printf("2. Display All Books\n");
+        printf("3. Search Books\n");
+        printf("4. Remove Book\n");
+        printf("5. Display Statistics\n");
+        printf("6. Exit\n");
+        printf("Choice: ");
+        
+        scanf("%d", &choice);
+        
+        switch (choice) {
+            case 1:
+                if (add_book(library)) {
+                    printf("Book added successfully!\n");
+                } else {
+                    printf("Failed to add book.\n");
+                }
+                break;
+            case 2:
+                display_all_books(library);
+                break;
+            case 3:
+                {
+                    int matches = search_books(library);
+                    printf("Found %d matching book(s).\n", matches);
+                }
+                break;
+            case 4:
+                if (remove_book(library)) {
+                    printf("Book removed successfully!\n");
+                } else {
+                    printf("Book not found.\n");
+                }
+                break;
+            case 5:
+                display_statistics(library);
+                break;
+            case 6:
+                printf("Cleaning up and exiting...\n");
+                cleanup_library(library);
+                return 0;
+            default:
+                printf("Invalid choice!\n");
+        }
+    }
 }
