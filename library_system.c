@@ -149,6 +149,28 @@ int add_book(Library *lib) {
     return 1;
 }
 
+void display_all_books(Library *lib) {
+    if(lib->book_count == 0) {
+        printf("\nNo books in the library yet.\n");
+        return;
+    }
+    
+    for(int i = 0; i < lib->book_count; i++) {
+        printf("\n=====================");
+        printf("\n    The Book n%d", i + 1);
+        printf("\n=====================\n");
+
+        printf("The title is: %s\n", lib->books[i].title);
+        int num_authors = lib->books[i].author_count;
+        for(int j = 0; j < num_authors; j++) {
+            printf("The author n%d is: %s\n", j + 1, lib->books[i].authors[j]);
+        }
+        printf("The number of authors is: %d\n", num_authors);
+        printf("The year of the book's debut is: %d\n", lib->books[i].year);
+        printf("The book has a total of %d pages\n", lib->books[i].pages);
+    }
+}
+
 /* =============== MAIN FUNCTION ============== */
 
 int main(void) {
