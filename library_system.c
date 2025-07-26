@@ -62,6 +62,26 @@ void cleanup_student(Student *student);
 Student* find_student_by_name(StudentSystem *sys, const char *name);
 Book* find_book_by_title(Library *lib, const char *title);
 
+Library* create_library(int initial_capacity) {
+    Library *lib = malloc(sizeof(Library));
+    if (lib == NULL) {
+        printf("Failed to allocate memory for library!\n");
+        return NULL;
+    }
+    
+    lib->books = malloc(sizeof(Book) * initial_capacity);
+    if (lib->books == NULL) {
+        printf("Failed to allocate memory for books array!\n");
+        free(lib);
+        return NULL;
+    }
+    
+    lib->book_count = 0;
+    lib->capacity = initial_capacity;
+    
+    return lib;
+}
+
 int main(void) {
     Library *library = NULL;
     int choice;
