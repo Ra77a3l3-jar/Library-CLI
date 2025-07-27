@@ -552,13 +552,13 @@ cd /home/raffaele/Documenti/Coding/Library
 
 ### 🔮 Current Implementation Status
 
-|| Feature | Status | Description |
-||---------|--------|-------------|
-|| 👥 **Student Management** | ✅ Implemented | Full student registration and tracking |
-|| 📚 **Book Borrowing** | ✅ Implemented | Complete lending system with limits |
-|| 🎨 **Enhanced Visuals** | ✅ Implemented | Beautiful console interface |
-|| 💾 **File Persistence** | 🔴 Future | Save/load library data |
-|| 🌐 **Network Support** | 🔴 Future | Multi-user access |
+| Feature | Status | Description |
+|---------|--------|-------------|
+| 👥 **Student Management** | ✅ Implemented | Full student registration and tracking |
+| 📚 **Book Borrowing** | ✅ Implemented | Complete lending system with limits |
+| 🎨 **Enhanced Visuals** | ✅ Implemented | Beautiful console interface |
+| 💾 **File Persistence** | 🔴 Future | Save/load library data |
+| 🌐 **Network Support** | 🔴 Future | Multi-user access |
 
 ### 🏗️ Student System Architecture (Implemented)
 
