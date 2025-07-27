@@ -755,6 +755,34 @@ void cleanup_student(Student *student) {
     student->max_books = 0;
 }
 
+Student* find_student_by_name(StudentSystem *sys, const char *name) {
+    if (sys == NULL || name == NULL) {
+        return NULL;
+    }
+    
+    for (int i = 0; i < sys->student_count; i++) {
+        if (case_insensitive_search(sys->students[i].name, name)) {
+            return &sys->students[i];
+        }
+    }
+    
+    return NULL; 
+}
+
+Book* find_book_by_title(Library *lib, const char *title) {
+    if (lib == NULL || title == NULL) {
+        return NULL;
+    }
+    
+    for (int i = 0; i < lib->book_count; i++) {
+        if (case_insensitive_search(lib->books[i].title, title)) {
+            return &lib->books[i];
+        }
+    }
+    
+    return NULL; 
+}
+
 /* =============== MAIN FUNCTION ============== */
 
 int main(void) {
