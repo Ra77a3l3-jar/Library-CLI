@@ -277,6 +277,101 @@ int remove_book(Library *lib) {
     return 1;
 }
 
+void cleanup_library(Library *lib) {
+    if(lib == NULL) return;
+
+    printf("\n=======================");
+    printf("\n    Freeing memory");
+    printf("\n=======================\n");
+    
+    for(int i = 0; i < lib->book_count; i++) {
+        cleanup_book(&lib->books[i]);
+        printf("Memory free for content book n%d\n", i + 1);
+    }
+    
+    free(lib->books);
+    lib->books = NULL;
+    printf("Memory free for books array\n");
+    
+    free(lib);
+    printf("Memory free for the library\n");
+}
+
+Book* resize_library_if_needed(Library *lib) {
+    // Check if resize is needed
+    if (lib->book_count >= lib->capacity) {
+        int new_capacity = 0;
+
+        printf("\n======================");
+        printf("\n   Resizing library");
+        printf("\n======================\n");
+
+        printf("Library full add more space: ");
+        scanf("%d", &new_capacity);
+        new_capacity += lib->capacity;
+        
+        // Reallocate with new capacity
+        Book *new_books = realloc(lib->books, sizeof(Book) * new_capacity);
+        
+        if (new_books == NULL) {
+            printf("Failed to resize library!\n");
+            return NULL;
+        }
+        
+        // Update library structure
+        lib->books = new_books;
+        lib->capacity = new_capacity;
+        
+        printf("Library resized to capacity %d\n", new_capacity);
+    }
+    
+    return lib->books;
+}
+
+void cleanup_book(Book *book) {
+    if (book->title != NULL) {
+        free(book->title);
+        book->title = NULL;
+    }
+    
+    // Free each author name string
+    if (book->authors != NULL) {
+        for (int i = 0; i < book->author_count; i++) {
+            if (book->authors[i] != NULL) {
+                free(book->authors[i]);
+                book->authors[i] = NULL;
+            }
+        }
+        
+        free(book->authors);
+        book->authors = NULL;
+    }
+
+    book->author_count = 0;
+}
+
+int case_insensitive_search(const char *haystack, const char *needle) {
+    int haystack_len = strlen(haystack);
+    int needle_len = strlen(needle);
+    
+    // Check each possible starting position
+    for (int i = 0; i <= haystack_len - needle_len; i++) {
+        int match = 1;
+        
+        // Compare characters at this position
+        for (int j = 0; j < needle_len; j++) {
+            if (tolower(haystack[i + j]) != tolower(needle[j])) {
+                match = 0;
+                break;
+            }
+        }
+        
+        if (match) return 1;
+    }
+    
+    return 0;
+}
+
 /* =============== MAIN FUNCTION ============== */
 
 int main(void) {
