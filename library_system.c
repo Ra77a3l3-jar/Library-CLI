@@ -590,6 +590,120 @@ int return_book(Library *lib, StudentSystem *sys) {
     return 1;
 }
 
+void display_student_books(StudentSystem *sys) {
+    char student_name[256];
+    
+    printf("\n\n╔══════════════════════════════════════════════════════════╗\n");
+    printf("║                📚 STUDENT'S BOOKS 📚                     ║\n");
+    printf("╚══════════════════════════════════════════════════════════╝\n\n");
+    
+    printf("👤 Enter student's name: ");
+    scanf(" %255[^\n]", student_name);
+    
+    Student *student = find_student_by_name(sys, student_name);
+    if(student == NULL) {
+        printf("❌ Student not found\n");
+        return;
+    }
+    
+    printf("\n--- Books borrowed by %s (ID: %d) ---\n", student->name, student->student_id);
+    printf("Currently borrowed: %d/%d books\n", student->borrowed_count, student->max_books);
+    
+    if(student->borrowed_count == 0) {
+        printf("No books currently borrowed.\n");
+    } else {
+        printf("\nBorrowed books:\n");
+        for(int i = 0; i < student->borrowed_count; i++) {
+            printf("%d. %s\n", i + 1, student->borrowed_books[i]);
+        }
+    }
+    
+    int remaining = student->max_books - student->borrowed_count;
+    printf("\nRemaining borrowing capacity: %d books\n", remaining);
+}
+
+void display_enhanced_statistics(Library *lib, StudentSystem *sys) {
+    printf("\n\n╔══════════════════════════════════════════════════════════╗\n");
+    printf("║                📊 ENHANCED STATISTICS 📊                 ║\n");
+    printf("╚══════════════════════════════════════════════════════════╝\n\n");
+    
+    // Display original library statistics first
+    if(lib->book_count == 0) {
+        printf("⚠️  No books in the library to show statistics.\n");
+        return;
+    }
+    
+    printf("📚 LIBRARY STATISTICS:\n");
+    printf("📗 Total number of books: %d\n", lib->book_count);
+    
+    // Count total authors
+    int tot_authors = 0;
+    for(int i = 0; i < lib->book_count; i++) {
+        tot_authors += lib->books[i].author_count;
+    }
+    printf("✍️  Total number of authors: %d\n", tot_authors);
+    
+    // Calculate average pages
+    int tot_pages_all = 0;
+    for(int i = 0; i < lib->book_count; i++) {
+        tot_pages_all += lib->books[i].pages;
+    }
+    int avr_pages = tot_pages_all / lib->book_count;
+    printf("📜 Average number of pages: %d\n", avr_pages);
+    
+    // Find newest and oldest books
+    int newest = 0, oldest = 0;
+    for(int i = 1; i < lib->book_count; i++) {
+        if(lib->books[i].year > lib->books[newest].year) {
+            newest = i;
+        }
+        if(lib->books[i].year < lib->books[oldest].year) {
+            oldest = i;
+        }
+    }
+    printf("✨ Newest book: '%s' from %d\n", lib->books[newest].title, lib->books[newest].year);
+    printf("🕰 Oldest book: '%s' from %d\n", lib->books[oldest].title, lib->books[oldest].year);
+    
+    // Student-related statistics
+    printf("\n👥 STUDENT STATISTICS:\n");
+    printf("👨‍🎓 Total registered students: %d\n", sys->student_count);
+    
+    // Count total books currently borrowed
+    int total_borrowed = 0;
+    for(int i = 0; i < sys->student_count; i++) {
+        total_borrowed += sys->students[i].borrowed_count;
+    }
+    printf("📚 Total books currently borrowed: %d\n", total_borrowed);
+    
+    // Calculate average books per student
+    if(sys->student_count > 0) {
+        float avg_books_per_student = (float)total_borrowed / sys->student_count;
+        printf("📚 Average books per student: %.2f\n", avg_books_per_student);
+    } else {
+        printf("📚 Average books per student: 0.00\n");
+    }
+    
+    // Find most active student
+    if(sys->student_count > 0) {
+        int most_active = 0;
+        for(int i = 1; i < sys->student_count; i++) {
+            if(sys->students[i].borrowed_count > sys->students[most_active].borrowed_count) {
+                most_active = i;
+            }
+        }
+        printf("🏆 Most active student: %s (ID: %d) with %d books\n", 
+               sys->students[most_active].name, 
+               sys->students[most_active].student_id,
+               sys->students[most_active].borrowed_count);
+    }
+    
+    // Books availability ratio
+    int available_books = lib->book_count - total_borrowed;
+    float availability_ratio = (float)available_books / lib->book_count * 100;
+    printf("📊 Books availability ratio: %.1f%% (%d available out of %d)\n", 
+           availability_ratio, available_books, lib->book_count);
+}
+
 /* =============== MAIN FUNCTION ============== */
 
 int main(void) {
