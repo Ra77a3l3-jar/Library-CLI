@@ -372,12 +372,71 @@ int case_insensitive_search(const char *haystack, const char *needle) {
     return 0;
 }
 
+StudentSystem* create_student_system(int initial_capacity) {
+    StudentSystem *student_sys = malloc(sizeof(StudentSystem));
+    if(student_sys == NULL) {
+        printf("Failed to allocate memory for Student_sys\n");
+        return NULL;
+    }
+
+    student_sys->students = malloc(sizeof(Student) * initial_capacity);
+    if(student_sys->students == NULL) {
+        printf("Failed to allocate memory for array of students\n");
+        free(student_sys);
+        return NULL;
+    }
+
+    student_sys->student_count = 0;
+    student_sys->student_capacity = initial_capacity;
+    return student_sys;
+}
+
+int add_student(StudentSystem *sys) {
+    if(sys->student_count >= sys->student_capacity) {
+        int new_capacity = 0;
+        printf("⚠️  The student array is full! Add more space: ");
+        scanf("%d", &new_capacity);
+        new_capacity += sys->student_capacity;
+
+        Student *new_student = realloc(sys->students, sizeof(Student) * new_capacity);
+        if(new_student == NULL) {
+            printf("❌ Memory allocation failed\n");
+            return 0;
+        }
+        sys->students = new_student;
+        sys->student_capacity = new_capacity;
+    }
+
+    printf("\n\n╔══════════════════════════════════════════════════════════╗\n");
+    printf("║                   👤 ADD STUDENT 👤                      ║\n");
+    printf("╚══════════════════════════════════════════════════════════╝\n\n");
+
+    int ID_temp = 0;
+    printf("🏷️  Enter the student ID: ");
+    scanf("%d", &ID_temp);
+    sys->students[sys->student_count].student_id = ID_temp;
+
+    char name_temp[256];
+    printf("👤 Enter the student's name: ");
+    scanf(" %255[^\n]", name_temp);
+    sys->students[sys->student_count].name = malloc(strlen(name_temp) + 1);
+    strcpy(sys->students[sys->student_count].name, name_temp);
+
+    sys->students[sys->student_count].max_books = 3;
+    sys->students[sys->student_count].borrowed_books = malloc(sizeof(char*) * 3); // dont know why i cant use MAX_BOOk
+    sys->students[sys->student_count].borrowed_count = 0;
+
+    sys->student_count ++;
+    return 1;
+}
+
 /* =============== MAIN FUNCTION ============== */
 
 int main(void) {
     Library *library = NULL;
     int choice;
     int init_capacity = 2;
+    int stud_capacity = 2;
     
     printf("=== Dynamic Library Management System ===\n");
     
@@ -386,6 +445,8 @@ int main(void) {
         printf("Failed to create library. Exiting.\n");
         return 1;
     }
+
+    StudentSystem *student_sys = create_student_system(stud_capacity);
     
     while (1) {
         printf("\n--- Library Menu ---\n");
