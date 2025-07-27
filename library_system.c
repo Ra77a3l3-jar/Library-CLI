@@ -213,6 +213,70 @@ void display_statistics(Library *lib) {
     printf("The oldest book is '%s' from %d\n", lib->books[oldest].title, lib->books[oldest].year);
 }
 
+int search_books(Library *lib) {
+    char search_term[256];
+    int matches = 0;
+
+    printf("\n=====================");
+    printf("\n     Book search");
+    printf("\n=====================\n");
+
+    printf("Enter search term: ");
+    scanf(" %255[^\n]", search_term);  
+
+    for(int i = 0; i < lib->book_count; i++) {
+        // Check title
+        if(case_insensitive_search(lib->books[i].title, search_term)) {
+            printf("The book '%s' is present\n", lib->books[i].title);
+            matches++;
+        } else {
+            // Check all authors
+            for(int j = 0; j < lib->books[i].author_count; j++) {
+                if(case_insensitive_search(lib->books[i].authors[j], search_term)) {
+                    printf("The author '%s' wrote the book '%s' which is present in the library\n", 
+                           lib->books[i].authors[j], lib->books[i].title);
+                    matches++;
+                    break;
+                }
+            }
+        }
+    }
+
+    return matches;
+}
+
+int remove_book(Library *lib) {
+
+    printf("\n====================");
+    printf("\n  Removing a Book");
+    printf("\n====================\n");
+    
+    char title_to_remove[256];
+    printf("Enter title to remove: ");
+    scanf(" %255[^\n]", title_to_remove);  
+    
+    // Find the book
+    int found_index = -1;
+    for (int i = 0; i < lib->book_count; i++) {
+        if (case_insensitive_search(lib->books[i].title, title_to_remove)) {
+            found_index = i;
+            break;
+        }
+    }
+    
+    if (found_index == -1) return 0; // Not found
+    
+    cleanup_book(&lib->books[found_index]);
+    
+    // Shift all books after this one to the left
+    for (int i = found_index; i < lib->book_count - 1; i++) {
+        lib->books[i] = lib->books[i + 1]; // Copy struct
+    }
+    
+    lib->book_count--;
+    return 1;
+}
+
 /* =============== MAIN FUNCTION ============== */
 
 int main(void) {
