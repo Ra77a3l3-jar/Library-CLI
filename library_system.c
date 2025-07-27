@@ -430,6 +430,37 @@ int add_student(StudentSystem *sys) {
     return 1;
 }
 
+void display_all_students(StudentSystem *sys) {
+    printf("\n\n╔══════════════════════════════════════════════════════════╗\n");
+    printf("║                 👥 ALL STUDENTS DISPLAY 👥               ║\n");
+    printf("╚══════════════════════════════════════════════════════════╝\n\n");
+    
+    if(sys->student_count == 0) {
+        printf("⚠️  No students registered yet.\n");
+        return;
+    }
+
+    for(int i = 0; i < sys->student_count; i++) {
+        printf("┌────────────────────────────────────────────────────┐\n");
+        printf("│             👤 STUDENT #%d 👤              │\n", i + 1);
+        printf("└────────────────────────────────────────────────────┘\n");
+
+        printf("🏷️  Student ID: %d\n", sys->students[i].student_id);
+        printf("👤 Name: %s\n", sys->students[i].name);
+        printf("📚 Books borrowed: %d/%d\n", sys->students[i].borrowed_count, sys->students[i].max_books);
+
+        if(sys->students[i].borrowed_count > 0) {
+            printf("📋 Borrowed books:\n");
+            for(int j = 0; j < sys->students[i].borrowed_count; j++) {
+                printf("   📖 %d. %s\n", j + 1, sys->students[i].borrowed_books[j]);
+            }
+        } else {
+            printf("✅ No books currently borrowed\n");
+        }
+        printf("\n");
+    }
+}
+
 /* =============== MAIN FUNCTION ============== */
 
 int main(void) {
