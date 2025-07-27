@@ -704,6 +704,57 @@ void display_enhanced_statistics(Library *lib, StudentSystem *sys) {
            availability_ratio, available_books, lib->book_count);
 }
 
+void cleanup_student_system(StudentSystem *sys) {
+    if(sys == NULL) return;
+    
+    printf("\n\n╔══════════════════════════════════════════════════════════╗\n");
+    printf("║              🧹 CLEANING STUDENT MEMORY 🧹               ║\n");
+    printf("╚══════════════════════════════════════════════════════════╝\n\n");
+    
+    // Loop through all students and call cleanup_student() for each
+    for(int i = 0; i < sys->student_count; i++) {
+        cleanup_student(&sys->students[i]);
+        printf("✅ Memory freed for student #%d\n", i + 1);
+    }
+    
+    // Free the students array
+    free(sys->students);
+    sys->students = NULL;
+    printf("✅ Memory freed for students array\n");
+    
+    // Free the StudentSystem structure
+    free(sys);
+    printf("✅ Memory freed for the student system\n");
+}
+
+void cleanup_student(Student *student) {
+    if(student == NULL) return;
+    
+    // Free the student's name
+    if(student->name != NULL) {
+        free(student->name);
+        student->name = NULL;
+    }
+    
+    // Free each borrowed book title in borrowed_books array
+    if(student->borrowed_books != NULL) {
+        for(int i = 0; i < student->borrowed_count; i++) {
+            if(student->borrowed_books[i] != NULL) {
+                free(student->borrowed_books[i]);
+                student->borrowed_books[i] = NULL;
+            }
+        }
+        
+        // Free the borrowed_books array itself
+        free(student->borrowed_books);
+        student->borrowed_books = NULL;
+    }
+    
+    student->student_id = 0;
+    student->borrowed_count = 0;
+    student->max_books = 0;
+}
+
 /* =============== MAIN FUNCTION ============== */
 
 int main(void) {
