@@ -1,45 +1,69 @@
-# 📚 Dynamic Library Management System
+# 🏛️ Advanced Library Management System
 
 <div align="center">
 
-![Library Management](https://img.shields.io/badge/Library-Management-blue?style=for-the-badge&logo=bookstack)
-![C Language](https://img.shields.io/badge/Language-C-blue?style=for-the-badge&logo=c)
-![Memory Management](https://img.shields.io/badge/Memory-Dynamic-orange?style=for-the-badge&logo=memory)
-![Status](https://img.shields.io/badge/Status-Active-green?style=for-the-badge)
+![Library Management](https://img.shields.io/badge/Library-Management-4A90E2?style=for-the-badge&logo=bookstack&logoColor=white)
+![C Language](https://img.shields.io/badge/Language-C-00599C?style=for-the-badge&logo=c&logoColor=white)
+![Memory Management](https://img.shields.io/badge/Memory-Dynamic-FF6B35?style=for-the-badge&logo=memory&logoColor=white)
+![Status](https://img.shields.io/badge/Status-Production_Ready-28A745?style=for-the-badge)
+![Version](https://img.shields.io/badge/Version-2.0-9B59B6?style=for-the-badge)
 
-*A sophisticated C-based library management system featuring dynamic memory allocation and advanced data structures*
+**🎯 A Production-Grade C Library Management System**
+
+*Featuring advanced memory management, sophisticated data structures, and professional-grade console interface*
+
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?style=flat-square&logo=github)](https://github.com)
+[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
 
 </div>
 
-## 📋 Table of Contents
+---
 
-- [🎯 Overview](#-overview)
-- [✨ Features](#-features)
-- [🏗️ Architecture](#-architecture)
-- [🧠 Memory Management](#-memory-management)
-- [📊 Data Structures](#-data-structures)
-- [🔧 Core Functions](#-core-functions)
-- [🚀 Getting Started](#-getting-started)
-- [💡 Usage Examples](#-usage-examples)
-- [📈 Performance](#-performance)
-- [🛠️ Advanced Features](#-advanced-features)
-- [🔮 Future Enhancements](#-future-enhancements)
+## 📑 Table of Contents
+
+<div align="center">
+
+| Section | Description |
+|---------|-------------|
+| [🎯 **Project Overview**](#-project-overview) | System introduction and key features |
+| [🏗️ **System Architecture**](#️-system-architecture) | Modular design and component interaction |
+| [🧠 **Memory Management**](#-memory-management) | Advanced allocation strategies and safety |
+| [📊 **Data Structures**](#-data-structures) | Core structures and their relationships |
+| [⚡ **Core Implementation**](#-core-implementation) | Function details and algorithms |
+| [🎨 **User Interface**](#-user-interface) | Console design and interaction flow |
+| [🚀 **Quick Start Guide**](#-quick-start-guide) | Installation and basic usage |
+| [💼 **Professional Usage**](#-professional-usage) | Advanced scenarios and examples |
+| [📈 **Performance Analysis**](#-performance-analysis) | Complexity and optimization details |
+| [🔬 **Technical Deep Dive**](#-technical-deep-dive) | Implementation internals |
+| [🛣️ **Development Roadmap**](#️-development-roadmap) | Future enhancements and goals |
+
+</div>
 
 ---
 
-## 🎯 Overview
+## 🎯 Project Overview
 
-The **Dynamic Library Management System** is a comprehensive C application that demonstrates advanced programming concepts including dynamic memory allocation, pointer manipulation, and structured data management. This system efficiently manages a collection of books with multiple authors, providing robust search capabilities and memory optimization.
+### 🌟 Executive Summary
 
-### 🎪 Key Highlights
+The **Advanced Library Management System** represents a sophisticated approach to library automation using pure C programming. This system demonstrates enterprise-level software engineering principles while maintaining simplicity and efficiency.
 
-| Feature | Description |
-|---------|-------------|
-| 🔄 **Dynamic Resizing** | Automatic memory expansion when capacity is reached |
-| 🔍 **Smart Search** | Case-insensitive search across titles and authors |
-| 👥 **Multi-Author Support** | Handles multiple authors per book dynamically |
-| 📊 **Rich Statistics** | Comprehensive analytics and reporting |
-| 🛡️ **Memory Safety** | Proper cleanup and leak prevention |
+<div align="center">
+
+### 🏆 Key Achievements
+
+| Achievement | Impact |
+|-------------|--------|
+| **🎨 Professional UI** | Beautiful console interface with Unicode graphics |
+| **🔄 Dynamic Scaling** | Intelligent memory management with automatic resizing |
+| **👥 Multi-User Support** | Complete student registration and book borrowing system |
+| **🔍 Advanced Search** | Fast, case-insensitive search across multiple fields |
+| **📊 Rich Analytics** | Comprehensive statistical reporting and insights |
+| **🛡️ Memory Safety** | Zero-leak architecture with comprehensive cleanup |
+| **⚡ High Performance** | Optimized algorithms for large-scale library operations |
+
+</div>
+
+### 🎪 Feature Showcase
 
 ---
 
@@ -51,6 +75,7 @@ The **Dynamic Library Management System** is a comprehensive C application that 
 - **🔍 Advanced Search**: Search by title or author with case-insensitive matching
 - **📊 Statistical Analysis**: Generate comprehensive library statistics
 - **🔄 Dynamic Memory**: Automatic memory allocation and expansion
+- **👥 Student Management**: Register students and manage their book borrowing
 - **🛡️ Memory Safety**: Comprehensive cleanup and leak prevention
 
 ---
@@ -65,32 +90,41 @@ The system follows a modular architecture with clear separation of concerns:
 ┌─────────────────────────────────────────────────────────┐
 │                    MAIN PROGRAM                         │
 ├─────────────────────────────────────────────────────────┤
-│  🎮 User Interface & Menu System                       │
+│  🎮 User Interface  Menu System                        │
 └─────────────────────────────────────────────────────────┘
                               │
 ┌─────────────────────────────────────────────────────────┐
 │                LIBRARY MANAGEMENT                       │
 ├─────────────────────────────────────────────────────────┤
 │  📚 Library Operations                                  │
-│  • create_library()    • add_book()                    │
-│  • display_all_books() • search_books()                │
-│  • remove_book()       • display_statistics()          │
+│  • create_library()    • add_book()                     │
+│  • display_all_books() • search_books()                 │
+│  • remove_book()       • display_statistics()           │
+└─────────────────────────────────────────────────────────┘
+                              │
+┌─────────────────────────────────────────────────────────┐
+│                STUDENT MANAGEMENT                       │
+├─────────────────────────────────────────────────────────┤
+│  👥 Student Operations                                  │
+│  • create_student_system()  • add_student()             │
+│  • borrow_book()            • return_book()             │
+│  • display_all_students()   • display_student_books()   │
 └─────────────────────────────────────────────────────────┘
                               │
 ┌─────────────────────────────────────────────────────────┐
 │                 MEMORY MANAGEMENT                       │
 ├─────────────────────────────────────────────────────────┤
 │  🧠 Memory Operations                                   │
-│  • Dynamic allocation   • Automatic resizing           │
-│  • Memory cleanup      • Leak prevention               │
+│  • Dynamic allocation   • Automatic resizing            │
+│  • Memory cleanup      • Leak prevention                │
 └─────────────────────────────────────────────────────────┘
                               │
 ┌─────────────────────────────────────────────────────────┐
 │                  UTILITY FUNCTIONS                      │
 ├─────────────────────────────────────────────────────────┤
 │  🔧 Helper Functions                                    │
-│  • case_insensitive_search()  • cleanup_book()         │
-│  • resize_library_if_needed()                          │
+│  • case_insensitive_search()  • cleanup_book()          │
+│  • resize_library_if_needed()                           │
 └─────────────────────────────────────────────────────────┘
 ```
 
@@ -136,8 +170,8 @@ Library Structure Memory Layout:
             └─────────────┘
                    │
                    ▼
-    ┌─────────────────────────────────────────┐
-    │           Authors Array                 │
+    ┌────────────────────────────────────────┐
+    │           Authors Array                │
     ├──────────┬──────────┬──────────┬───────┤
     │ ptr[0] ──┤ ptr[1] ──┤ ptr[2] ──┤  ...  │
     └──────────┴──────────┴──────────┴───────┘
@@ -199,12 +233,25 @@ typedef struct {
     int author_count;      // 🔢 Number of authors
     int year;              // 📅 Publication year
     int pages;             // 📄 Page count
-    int is_available;      // ✅ Availability status
-    char *borrowed_by;     // 👤 Borrower information
+    int is_available;      // ✅ Availability status (1=available, 0=borrowed)
+    char *borrowed_by;     // 👤 Borrower information (student name)
 } Book;
 ```
 
-**Flexibility**: Supports multiple authors per book with dynamic allocation.
+**Flexibility**: Supports multiple authors per book with dynamic allocation and tracks borrowing status.
+
+#### 👥 Student Structure
+```c
+typedef struct {
+    int student_id;        // 🏷️  Unique student identifier
+    char *name;           // 👤 Dynamic student name
+    char **borrowed_books; // 📚 Array of borrowed book titles
+    int borrowed_count;    // 🔢 Current books borrowed
+    int max_books;         // 📈 Maximum borrowing limit
+} Student;
+```
+
+**Features**: Dynamic borrowing tracking with configurable limits and memory-efficient storage.
 
 ---
 
@@ -334,12 +381,15 @@ gcc -g -o library_system library_system.c
 gcc -O2 -o library_system library_system.c
 
 # With all warnings
-gcc -Wall -Wextra -o library_system library_system.c
+gcc -Wall -Wextra -o library_system library_system.c -lm
 ```
 
 ### ▶️ Execution
 
 ```bash
+# Ensure you are in the correct directory
+cd /home/raffaele/Documenti/Coding/Library
+
 # Run the program
 ./library_system
 ```
@@ -351,53 +401,118 @@ gcc -Wall -Wextra -o library_system library_system.c
 ### 📚 Adding a Book
 
 ```
-=== Dynamic Library Management System ===
+╔══════════════════════════════════════════════════════════╗
+║                    📖 LIBRARY MENU 📖                    ║
+╠══════════════════════════════════════════════════════════╣
+║  📖 BOOK MANAGEMENT                                      ║
+║  1. 📚 Add Book                                          ║
+║  2. 📋 Display All Books                                 ║
+║  3. 🔍 Search Books                                      ║
+║  4. 🗑️  Remove Book                                      ║
+║  5. 📊 Display Statistics                                ║
+║                                                          ║
+║  👥 STUDENT MANAGEMENT                                   ║
+║  7. 👤 Add Student                                       ║
+║  8. 👥 Display All Students                              ║
+║                                                          ║
+║  📖 BORROWING SYSTEM                                     ║
+║  9. 📤 Borrow Book                                       ║
+║  10. 📥 Return Book                                      ║
+║  11. 📚 Display Student's Books                          ║
+║                                                          ║
+║  📈 REPORTS & CLEANUP                                    ║
+║  12. 📊 Enhanced Statistics                              ║
+║  6. 🚪 Exit                                              ║
+╚══════════════════════════════════════════════════════════╝
 
---- Library Menu ---
-1. Add Book
-2. Display All Books
-3. Search Books
-4. Remove Book
-5. Display Statistics
-6. Exit
-Choice: 1
+🎯 Enter your choice: 1
 
-Enter the book title: The C Programming Language
-How many authors? 2
+╔══════════════════════════════════════════════════════════╗
+║                    📚 ADD NEW BOOK 📚                    ║
+╚══════════════════════════════════════════════════════════╝
 
-Enter author 1: Brian W. Kernighan
-Enter author 2: Dennis M. Ritchie
-Enter the book's year: 1978
-Enter the total number of pages: 272
-Book added successfully!
+📖 Enter the book title: The C Programming Language
+✍️  How many authors? 2
+
+👤 Enter author 1: Brian W. Kernighan
+👤 Enter author 2: Dennis M. Ritchie
+📅 Enter the book's year: 1978
+📜 Enter the total number of pages: 272
+
+✅ ═══════════════════════════════════════════════════════
+   📚 BOOK ADDED SUCCESSFULLY! 📚
+   ═══════════════════════════════════════════════════════
 ```
 
 ### 🔍 Searching Books
 
 ```
-Choice: 3
+🎯 Enter your choice: 3
 
-=====================
-     Book search
-=====================
-Enter search term: kernighan
-The author 'Brian W. Kernighan' wrote the book 'The C Programming Language' which is present in the library
-Found 1 matching book(s).
+╔══════════════════════════════════════════════════════════╗
+║                    🔍 BOOK SEARCH 🔍                     ║
+╚══════════════════════════════════════════════════════════╝
+
+🔎 Enter search term: kernighan
+
+🔍 Searching for: 'kernighan'
+
+✅ 👤 Found author: 'Brian W. Kernighan' wrote 'The C Programming Language'
+
+🔍 ═══════════════════════════════════════════════════════
+   📊 SEARCH COMPLETED: 1 MATCHING BOOK(S) FOUND
+   ═══════════════════════════════════════════════════════
 ```
 
 ### 📊 Viewing Statistics
 
 ```
-Choice: 5
+🎯 Enter your choice: 5
 
-==========================
-    Book's statistics
-==========================
-The total number of books is: 5
-The total number of authors is: 8
-The average number of pages in these books is: 425
-The newest book is 'Modern C++' from 2020
-The oldest book is 'The C Programming Language' from 1978
+╔══════════════════════════════════════════════════════════╗
+║                   📊 BOOK STATISTICS 📊                  ║
+╚══════════════════════════════════════════════════════════╝
+
+📚 Total number of books: 5
+✍️  Total number of authors: 8
+📜 Average number of pages: 425
+✨ Newest book: 'Modern C++' from 2020
+🕰️ Oldest book: 'The C Programming Language' from 1978
+```
+
+### 👤 Adding a Student
+
+```
+🎯 Enter your choice: 7
+
+╔══════════════════════════════════════════════════════════╗
+║                   👤 ADD STUDENT 👤                      ║
+╚══════════════════════════════════════════════════════════╝
+
+🏷️  Enter the student ID: 12345
+👤 Enter the student's name: John Doe
+
+✅ ═══════════════════════════════════════════════════════
+   👤 STUDENT ADDED SUCCESSFULLY! 👤
+   ═══════════════════════════════════════════════════════
+```
+
+### 📤 Borrowing a Book
+
+```
+🎯 Enter your choice: 9
+
+╔══════════════════════════════════════════════════════════╗
+║                   📤 BORROW BOOK 📤                      ║
+╚══════════════════════════════════════════════════════════╝
+
+👤 Enter student's name: John Doe
+📖 Enter book title: The C Programming Language
+✅ Book borrowed successfully!
+
+✅ ═══════════════════════════════════════════════════════
+   📤 BOOK BORROWED SUCCESSFULLY! 📤
+   ═══════════════════════════════════════════════════════
 ```
 
 ---
@@ -435,31 +550,32 @@ The oldest book is 'The C Programming Language' from 1978
 
 ## 🛠️ Advanced Features
 
-### 🔮 Planned Enhancements (Partially Implemented)
+### 🔮 Current Implementation Status
 
-| Feature | Status | Description |
-|---------|--------|-------------|
-| 👥 **Student Management** | 🟡 Declared | Track students and borrowing |
-| 📚 **Book Borrowing** | 🟡 Planned | Lending system implementation |
-| 💾 **File Persistence** | 🔴 Future | Save/load library data |
-| 🌐 **Network Support** | 🔴 Future | Multi-user access |
+|| Feature | Status | Description |
+||---------|--------|-------------|
+|| 👥 **Student Management** | ✅ Implemented | Full student registration and tracking |
+|| 📚 **Book Borrowing** | ✅ Implemented | Complete lending system with limits |
+|| 🎨 **Enhanced Visuals** | ✅ Implemented | Beautiful console interface |
+|| 💾 **File Persistence** | 🔴 Future | Save/load library data |
+|| 🌐 **Network Support** | 🔴 Future | Multi-user access |
 
-### 🏗️ Student System Architecture (Future)
+### 🏗️ Student System Architecture (Implemented)
 
 ```c
-// Student management structures (declared but not implemented)
+// Student management structures (fully implemented)
 typedef struct {
-    int student_id;
-    char *name;
-    char **borrowed_books;
-    int borrowed_count;
-    int max_books;
+    int student_id;        // Unique student identifier
+    char *name;           // Dynamic student name
+    char **borrowed_books; // Array of borrowed book titles
+    int borrowed_count;    // Current number of borrowed books
+    int max_books;         // Maximum borrowing limit (default: 3)
 } Student;
 
 typedef struct {
-    Student *students;
-    int student_count;
-    int student_capacity;
+    Student *students;     // Dynamic array of students
+    int student_count;     // Current number of students
+    int student_capacity;  // Maximum student capacity
 } StudentSystem;
 ```
 
@@ -469,29 +585,34 @@ typedef struct {
 
 ### 📅 Roadmap
 
-#### Phase 1: Student Management 👥
-- [ ] Implement student registration
-- [ ] Book borrowing/returning system
-- [ ] Overdue book tracking
-- [ ] Student statistics
+#### Phase 1: Student Management 👥 (✅ COMPLETED)
+- [x] Implement student registration
+- [x] Book borrowing/returning system
+- [x] Student borrowing limits and tracking
+- [x] Enhanced student statistics
+- [x] Beautiful visual interface enhancements
 
-#### Phase 2: Data Persistence 💾
+#### Phase 2: Data Persistence 💾 (NEXT PRIORITY)
 - [ ] File-based storage (CSV/JSON)
 - [ ] Database integration (SQLite)
 - [ ] Backup and restore functionality
 - [ ] Data import/export
+- [ ] Configuration file support
 
 #### Phase 3: Advanced Features 🌟
 - [ ] GUI interface (GTK/Qt)
-- [ ] Web interface
+- [ ] Web interface (HTML/CSS/JavaScript)
 - [ ] Network multi-user support
 - [ ] Advanced reporting and analytics
+- [ ] Book reservation system
+- [ ] Overdue book tracking with fines
 
 #### Phase 4: Enterprise Features 🏢
-- [ ] User authentication
-- [ ] Role-based access control
-- [ ] Audit logging
-- [ ] API development
+- [ ] User authentication and authorization
+- [ ] Role-based access control (Admin/Librarian/Student)
+- [ ] Audit logging and activity tracking
+- [ ] RESTful API development
+- [ ] Integration with external library systems
 
 ---
 
@@ -507,12 +628,12 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 👨‍💻 Author
 
-**Raffaele** - *Library Management System Developer*
+**Raffaele** - *Library_System Creator*
 
 ---
 
 *Built with ❤️ and lots of ☕ using C programming language*
 
-**⭐ Star this repository if you found it helpful!**
+**⭐ Star this repository if you liked it**
 
 </div>
