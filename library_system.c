@@ -461,6 +461,135 @@ void display_all_students(StudentSystem *sys) {
     }
 }
 
+int borrow_book(Library *lib, StudentSystem *sys) {
+    char student_name[256];
+    char book_title[256];
+
+    printf("\n\n╔══════════════════════════════════════════════════════════╗\n");
+    printf("║                   📤 BORROW BOOK 📤                      ║\n");
+    printf("╚══════════════════════════════════════════════════════════╝\n\n");
+
+    printf("👤 Enter student's name: ");
+    scanf(" %255[^\n]", student_name);
+
+    // Find student
+    Student *student = find_student_by_name(sys, student_name);
+    if (student == NULL) {
+        printf("❌ Student not found.\n");
+        return 0; 
+    }
+
+    // Prompt for book title
+    printf("📖 Enter book title: ");
+    scanf(" %255[^\n]", book_title);
+
+    // Find book
+    Book *book = find_book_by_title(lib, book_title);
+    if (book == NULL) {
+        printf("❌ Book not found.\n");
+        return 0; 
+    }
+
+    // Check if book is available
+    if (book->is_available == 0) {
+        printf("❌ Book is currently borrowed by someone else.\n");
+        return 0; 
+    }
+
+    // Check if student can borrow more books
+    if (student->borrowed_count >= student->max_books) {
+        printf("❌ Student has reached the borrowing limit (%d books).\n", student->max_books);
+        return 0; 
+    }
+
+    // Borrow the book
+    book->is_available = 0;
+    book->borrowed_by = malloc(strlen(student->name) + 1);
+    strcpy(book->borrowed_by, student->name);
+
+    // Add book to student's borrowed books
+    student->borrowed_books[student->borrowed_count] = malloc(strlen(book->title) + 1);
+    strcpy(student->borrowed_books[student->borrowed_count], book->title);
+    student->borrowed_count++;
+
+    printf("✅ Book borrowed successfully!\n");
+    return 1; 
+}
+
+int return_book(Library *lib, StudentSystem *sys) {
+    char student_name[256];
+    char book_title[256];
+
+    printf("\n\n╔══════════════════════════════════════════════════════════╗\n");
+    printf("║                   📥 RETURN BOOK 📥                      ║\n");
+    printf("╚══════════════════════════════════════════════════════════╝\n\n");
+
+    printf("👤 Enter student's name: ");
+    scanf(" %255[^\n]", student_name);
+
+    Student *student = find_student_by_name(sys, student_name);
+    if(student == NULL) {
+        printf("❌ Student not found\n");
+        return 0;
+    }
+
+    printf("📖 Enter book title: ");
+    scanf(" %255[^\n]", book_title);
+
+    Book *book = find_book_by_title(lib, book_title);
+    if(book == NULL) {
+        printf("❌ Book not found\n");
+        return 0;
+    }
+
+    // Check if book is currently borrowed
+    if(book->is_available == 1) {
+        printf("❌ Book is not currently borrowed\n");
+        return 0;
+    }
+
+    // Check if book is borrowed by this student
+    if(book->borrowed_by == NULL || !case_insensitive_search(book->borrowed_by, student->name)) {
+        printf("❌ Book is not borrowed by this student\n");
+        return 0;
+    }
+
+    // Find the book in student's borrowed_books array
+    int book_index = -1;
+    for(int i = 0; i < student->borrowed_count; i++) {
+        if(case_insensitive_search(student->borrowed_books[i], book_title)) {
+            book_index = i;
+            break;
+        }
+    }
+
+    if(book_index == -1) {
+        printf("❌ Book not found in student's borrowed list\n");
+        return 0;
+    }
+
+    // Update book: make it available and clear borrowed_by
+    book->is_available = 1;
+    if(book->borrowed_by != NULL) {
+        free(book->borrowed_by);
+        book->borrowed_by = NULL;
+    }
+
+    // Remove book from student's borrowed_books array
+    free(student->borrowed_books[book_index]);
+    
+    // Shift remaining books to fill the gap
+    for(int i = book_index; i < student->borrowed_count - 1; i++) {
+        student->borrowed_books[i] = student->borrowed_books[i + 1];
+    }
+    
+    // Decrement borrowed count
+    student->borrowed_count--;
+
+    printf("✅ Book returned successfully!\n");
+    return 1;
+}
+
 /* =============== MAIN FUNCTION ============== */
 
 int main(void) {
